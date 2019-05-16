@@ -9,7 +9,7 @@ async function listBranches(organizationName, repository) {
     if (!organizationName) throw new Error('organization name should not be null');
     if (!repository) throw new Error('repository should not be null');
 
-    let token = 'ffd7a441a1f9429bc80e60b76e4e3ba6b3562573';
+    let token = '';
     let headers = {
         'Content-Type': 'application/vnd.github.v3+json',
         Authorization: `token ${token}`
@@ -47,7 +47,7 @@ async function listPullRequestsByBranch(organizationName, repository, branch) {
     if (!repository) throw new Error('repository should not be null');
     if (!branch) throw new Error('branch should not be null');
 
-    let token = 'ffd7a441a1f9429bc80e60b76e4e3ba6b3562573';
+    let token = '';
     let headers = {
         'Content-Type': 'application/vnd.github.v3+json',
         Authorization: `token ${token}`
@@ -66,7 +66,7 @@ async function branchDetails(organizationName, repository, branch) {
     if (!repository) throw new Error('repository should not be null');
     if (!branch) throw new Error('branch should not be null');
 
-    let token = 'ffd7a441a1f9429bc80e60b76e4e3ba6b3562573';
+    let token = '';
     let headers = {
         'Content-Type': 'application/vnd.github.v3+json',
         Authorization: `token ${token}`
