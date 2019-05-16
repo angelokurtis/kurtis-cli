@@ -1,0 +1,27 @@
+{
+  "name": "kurtis-cli",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "The Skynet Command Line Interface (CLI) makes some daily tasks easier directly from the terminal.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tiago Angelo @angelokurtis",
+  "bin": {
+    "kurtis": "./bin/run"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "aigle": "^1.12.0",
+    "axios": "^0.18.0",
+    "caporal": "^1.1.0",
+    "change-case": "^3.1.0",
+    "http-to-curl": "^1.4.2",
+    "inquirer": "^6.2.0",
+    "lodash": "^4.17.11",
+    "moment-timezone": "^0.5.23",
+    "sqlite": "^3.0.0",
+    "xlsx": "^0.14.1",
+    "xml2json": "^0.11.2"
+  }
+}

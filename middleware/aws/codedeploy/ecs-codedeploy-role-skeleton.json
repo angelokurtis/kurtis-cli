@@ -1,0 +1,7 @@
+{
+  "Path": "/",
+  "RoleName": "ecsCodeDeployRole",
+  "AssumeRolePolicyDocument": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"codedeploy.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}",
+  "Description": "Allows CodeDeploy to call AWS services such as Amazon ECS service on your behalf.",
+  "MaxSessionDuration": 3600
+}

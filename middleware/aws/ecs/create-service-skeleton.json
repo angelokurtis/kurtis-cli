@@ -1,0 +1,20 @@
+{
+  "desiredCount": 1,
+  "loadBalancers": [],
+  "launchType": "EC2",
+  "deploymentConfiguration": {
+    "minimumHealthyPercent": 50,
+    "maximumPercent": 200
+  },
+  "placementStrategy": [
+    {
+      "field": "attribute:ecs.availability-zone",
+      "type": "spread"
+    },
+    {
+      "field": "instanceId",
+      "type": "spread"
+    }
+  ],
+  "healthCheckGracePeriodSeconds": 0
+}

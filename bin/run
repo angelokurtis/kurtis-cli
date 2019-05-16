@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const ERROR_PATTERN = "\x1b[31m%s\x1b[0m";
+
+require('../src')()
+    .then(flush)
+    .catch(handle);
+
+function flush(output) {
+    if (typeof output === 'object') console.log(JSON.stringify(output, null, 2));
+    else if (output) console.log(output);
+}
+
+function handle(err) {
+    console.error(ERROR_PATTERN, err)
+}

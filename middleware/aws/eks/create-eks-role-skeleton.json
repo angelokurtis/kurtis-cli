@@ -1,0 +1,7 @@
+{
+  "Path": "/",
+  "RoleName": "eksServiceRole",
+  "AssumeRolePolicyDocument": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"eks.amazonaws.com\"}}]}",
+  "Description": "Allows EKS to manage clusters on your behalf.",
+  "MaxSessionDuration": 3600
+}
