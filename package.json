@@ -18,6 +18,7 @@
     "change-case": "^3.1.0",
     "http-to-curl": "^1.4.2",
     "inquirer": "^6.2.0",
+    "json5": "^2.1.0",
     "lodash": "^4.17.11",
     "moment-timezone": "^0.5.23",
     "sqlite": "^3.0.0",
