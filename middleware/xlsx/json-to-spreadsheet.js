@@ -5,7 +5,8 @@ const Aigle = require('aigle');
 
 async function jsonToSpreadsheet(json, filename) {
     if (!json) throw new Error('JSON should not be null');
-    filename = filename || `spreadsheet-${new Date()}`;
+    filename = filename || `spreadsheet-${new Date().getMilliseconds()}`;
+    json = Array.isArray(json) ? json : [json];
     const columns = await Aigle.resolve(json).forEach(transform);
 
     const wb = XLSX.utils.book_new();
