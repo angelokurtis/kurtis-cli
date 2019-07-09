@@ -16,6 +16,7 @@
     "axios": "^0.18.0",
     "caporal": "^1.1.0",
     "change-case": "^3.1.0",
+    "cli-table": "^0.3.1",
     "http-to-curl": "^1.4.2",
     "inquirer": "^6.2.0",
     "json5": "^2.1.0",

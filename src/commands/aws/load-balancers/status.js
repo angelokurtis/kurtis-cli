@@ -2,7 +2,7 @@
 
 const cli = require('caporal');
 const handle = require('../../../../middleware/output-handler');
-const inquirer = require('inquirer');
+const Table = require('cli-table');
 
 async function status(args, {balancerName, targetName}) {
     try {
@@ -11,7 +11,34 @@ async function status(args, {balancerName, targetName}) {
             require('../../../../middleware/aws/load-balancers/select-balancer')());
         const targets = await require('../../../../middleware/aws/load-balancers/list-target-groups')(balancer, targetName);
         const health = await require('../../../../middleware/aws/load-balancers/health')(targets);
-        handle.success(health);
+
+        const table = new Table({
+            head: ['TARGET', 'ADDRESS', 'STATUS'],
+            chars: {
+                'top': '',
+                'top-mid': '',
+                'top-left': '',
+                'top-right': '',
+                'bottom': '',
+                'bottom-mid': '',
+                'bottom-left': '',
+                'bottom-right': '',
+                'left': '',
+                'left-mid': '',
+                'mid': '',
+                'mid-mid': '',
+                'right': '',
+                'right-mid': '',
+                'middle': ''
+            }
+        });
+
+        for (let i = 0; i < health.length; i++) {
+            const {target, address, status} = health[i];
+            table.push([target, address, status])
+        }
+
+        handle.success(table.toString());
     } catch (e) {
         handle.error(e);
     }
