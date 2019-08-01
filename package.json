@@ -17,11 +17,13 @@
     "caporal": "^1.1.0",
     "change-case": "^3.1.0",
     "cli-table": "^0.3.1",
+    "get-folder-size": "^2.0.1",
     "http-to-curl": "^1.4.2",
     "inquirer": "^6.2.0",
     "json5": "^2.1.0",
     "lodash": "^4.17.11",
     "moment-timezone": "^0.5.23",
+    "rimraf": "^2.6.3",
     "sqlite": "^3.0.0",
     "xlsx": "^0.14.1",
     "xml2json": "^0.11.2"
