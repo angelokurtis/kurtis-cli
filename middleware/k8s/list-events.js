@@ -5,7 +5,7 @@ const Aigle = require('aigle');
 const moment = require('moment-timezone');
 
 async function listEvents() {
-    const {items} = await bash('kubectl get event -o json');
+    const {items} = await bash('kubectl get event --all-namespaces -o json', true);
     return Aigle
         .resolve(items)
         .map(function ({firstTimestamp, reason, involvedObject, message}) {

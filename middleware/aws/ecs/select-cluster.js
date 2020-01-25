@@ -7,7 +7,7 @@ const inquirer = require('inquirer');
 async function selectCluster() {
     const clusters = await require('./list-clusters')();
     const length = clusters.length;
-    if (length < 1) {
+    if (length > 1) {
         const questions = [{
             type: 'list',
             name: 'cluster',

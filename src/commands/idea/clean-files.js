@@ -11,11 +11,18 @@ async function cleanFiles(args, {projectPath}) {
     projectPath = projectPath || '.';
     projectPath = `${path.resolve(projectPath)}/`;
     try {
-        await Aigle
-            .resolve(intellij.concat(netbeans).concat(eclipse))
-            .flatMap(file => sh(`find ${projectPath} -iname '${file}'`))
-            .filter(file => file.length > 0)
-            .forEach(file => sh(`rm -rf '${file}'`, true))
+        await Promise.all[
+            Aigle
+                .resolve(intellij.concat(netbeans).concat(eclipse))
+                .flatMap(file => sh(`find ${projectPath} -iname '${file}' -type d`, false))
+                .filter(file => file.length > 0)
+                .forEach(file => sh(`rm -rf '${file}'`, true)),
+                Aigle
+                    .resolve(intellij.concat(netbeans).concat(eclipse))
+                    .flatMap(file => sh(`find ${projectPath} -iname '${file}' -type f`, false))
+                    .filter(file => file.length > 0)
+                    .forEach(file => sh(`rm '${file}'`, true))
+            ]
     } catch (e) {
         handle.error(e);
     }
@@ -32,6 +39,43 @@ const intellij = [
     '*.iml'
 ];
 
-const netbeans = [];
+const netbeans = [
+    '**/nbproject/private/',
+    '**/nbproject/Makefile-*.mk',
+    '**/nbproject/Package-*.bash',
+    'build/',
+    'nbbuild/',
+    'dist/',
+    'nbdist/',
+    '.nb-gradle/'
+];
 
-const eclipse = [];
+const eclipse = [
+    '.metadata',
+    'bin/',
+    'tmp/',
+    '*.tmp',
+    '*.bak',
+    '*.swp',
+    '*~.nib',
+    'local.properties',
+    '.settings/',
+    '.loadpath',
+    '.recommenders',
+    '.externalToolBuilders/',
+    '*.launch',
+    '*.pydevproject',
+    '.cproject',
+    '.autotools',
+    '.factorypath',
+    '.buildpath',
+    '.target',
+    '.tern-project',
+    '.texlipse',
+    '.springBeans',
+    '.recommenders/',
+    '.apt_generated/',
+    '.cache-main',
+    '.scala_dependencies',
+    '.worksheet'
+];

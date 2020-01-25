@@ -11,17 +11,20 @@ async function cleanAllButDevelop(projectPath) {
     const projects = await bash(`find ${projectPath} -type d -iname '.git'`);
     await Aigle.resolve(projects)
         .forEach(async function (project) {
-            const currentBranch = (await run(`git --git-dir=${project} rev-parse --abbrev-ref HEAD`))[0];
+            const currentBranch = (await run({cmd: 'git rev-parse --abbrev-ref HEAD', dir: project}))[0];
             if (currentBranch !== 'develop') {
-                await run(`git --git-dir=${project} checkout develop --`, true);
+                await run({cmd: 'git checkout develop --', dir: project}, true);
             }
-            await run(`git --git-dir=${project} pull`, true);
+            await run({cmd: 'git pull', dir: project}, true);
         });
 
     await Aigle.resolve(projects)
         .map(async project => ({project, branches: await require('./list-all-branches')(project)}))
         .filter(({branches}) => branches.length > 0)
-        .forEach(({project, branches}) => bash(`git --git-dir '${project}' branch -D ${branches.join(' ')}`, true));
+        .forEach(({project, branches}) => bash({
+            cmd: `git branch -D ${branches.join(' ')}`,
+            dir: project
+        }, true));
 }
 
 async function run(command, debug) {

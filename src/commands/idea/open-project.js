@@ -9,7 +9,7 @@ async function openProject(args, {projectPath}) {
     projectPath = projectPath || '.';
     projectPath = `${path.resolve(projectPath)}/`;
     try {
-        const command = `/snap/intellij-idea-ultimate/current/bin/idea.sh ${projectPath}`;
+        const command = `idea1 ${projectPath}`;
         await sh(`nohup ${command} >/dev/null 2>&1 &`, true);
     } catch (e) {
         handle.error(e);

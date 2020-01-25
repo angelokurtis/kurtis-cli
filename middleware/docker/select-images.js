@@ -6,8 +6,11 @@ const inquirer = require('inquirer');
 
 async function selectImages() {
     const images = await listImages();
-    let choices = await Aigle.resolve(images).map(({image, id}) => ({name: image, value: id}));
+    let choices = await Aigle.resolve(images)
+        .map(({image, id}) => ({name: image, value: id}))
+        .orderBy('name', 'asc');
     let questions = [{
+        pageSize: 20,
         type: 'checkbox',
         name: 'images',
         message: 'Choose the Docker Images:',

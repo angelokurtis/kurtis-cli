@@ -5,7 +5,7 @@ const handle = require('../../../../middleware/output-handler');
 
 async function cleanMergedRecursively(args, {path: projectPath}) {
     try {
-        const noMergedBranches = await require('../../../../middleware/git/list-no-merged-branches-recursively')(projectPath);
+        const noMergedBranches = await require('../../../../middleware/git/list-branches-recursively')(projectPath);
         noMergedBranches.forEach(({project, branches}) => {
             console.log(project.replace('/.git', ''));
             branches.forEach(branch => console.log(`\t ${branch}`))

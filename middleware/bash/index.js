@@ -4,16 +4,26 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const _ = require('lodash');
 const os = require('os');
+const yaml = require('js-yaml');
 const AppContext = require('../../context');
 
 const FG_BLUE = "\x1b[34m%s\x1b[0m";
 
 async function bash(command, debug, dryRun) {
-    command = await setProfileIfAwsCommand(command);
-    if (debug) console.log(FG_BLUE, command);
-    if (!dryRun) {
-        return await run(command)
-    } else return {};
+    if (typeof command === 'object') {
+        let {cmd, dir} = command;
+        cmd = await setProfileIfAwsCommand(cmd);
+        if (debug) console.log(FG_BLUE, cmd);
+        if (!dryRun) {
+            return await run(`cd ${dir} && ${cmd}`)
+        } else return {};
+    } else {
+        command = await setProfileIfAwsCommand(command);
+        if (debug) console.log(FG_BLUE, command);
+        if (!dryRun) {
+            return await run(command)
+        } else return {};
+    }
 }
 
 async function setProfileIfAwsCommand(command) {
