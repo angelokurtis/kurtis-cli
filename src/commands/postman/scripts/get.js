@@ -18,8 +18,8 @@ async function get(args, {collection}) {
         let {item: items} = JSON.parse(raw);
         let scenarios = await extractScenarios(items);
         // handle.success(scenarios);
-        await save(scenarios);
-        handle.success('saved!');
+        // await save(scenarios);
+        // handle.success('saved!');
     } catch (e) {
         handle.error(e);
     }
@@ -28,6 +28,7 @@ async function get(args, {collection}) {
 function extractScenarios(items, path) {
     return Aigle.resolve(items)
         .flatMap(async function ({name, item, event: events, _postman_isSubFolder}, index) {
+            console.log({name, events: events ? events.length : 0, _postman_isSubFolder})
             if (!events || _postman_isSubFolder) {
                 let newPath = path || '';
                 newPath += `/${index}-${changeCase.paramCase(name)}`;

@@ -9,19 +9,20 @@ const AppContext = require('../../context');
 
 const FG_BLUE = "\x1b[34m%s\x1b[0m";
 const BG_GREEN = "\x1b[42m%s\x1b[0m";
+const LIGHT_CYAN = "\x1b[96m%s\x1b[0m";
 
 
 async function bash(command, debug, dryRun) {
     if (typeof command === 'object') {
         let {cmd, dir} = command;
         cmd = await setProfileIfAwsCommand(cmd);
-        if (debug) console.log(BG_GREEN, cmd);
+        if (debug) console.log(LIGHT_CYAN, cmd);
         if (!dryRun) {
             return await run(`cd ${dir} && ${cmd}`)
         } else return {};
     } else {
         command = await setProfileIfAwsCommand(command);
-        if (debug) console.log(BG_GREEN, command);
+        if (debug) console.log(LIGHT_CYAN, command);
         if (!dryRun) {
             return await run(command)
         } else return {};

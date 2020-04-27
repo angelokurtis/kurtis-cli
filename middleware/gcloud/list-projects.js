@@ -5,7 +5,7 @@ const Aigle = require('aigle');
 Aigle.mixin(require('lodash'));
 
 function listProjects() {
-    return bash(`gcloud projects list --format json`, true);
+    return bash(`gcloud projects list --format json`);
 }
 
 module.exports = listProjects;

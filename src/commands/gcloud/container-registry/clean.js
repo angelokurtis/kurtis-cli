@@ -4,19 +4,19 @@ const ROOT_PATH = '../../../..';
 
 const cli = require('caporal');
 const handle = require(`${ROOT_PATH}/middleware/output-handler`);
+const selectUntagged = require(`${ROOT_PATH}/middleware/gcloud/select-untagged`);
 
-async function setPreferred() {
+async function clean() {
     try {
-        const namespace = await require(`${ROOT_PATH}/middleware/k8s/select-namespace`)();
-        await require(`${ROOT_PATH}/middleware/k8s/set-preferred`)(namespace);
+        const images = await selectUntagged();
+        handle.success(images);
     } catch (e) {
         handle.error(e);
     }
 }
 
-
 module.exports = function (command) {
     cli
         .command(command, '')
-        .action(setPreferred);
+        .action(clean);
 };

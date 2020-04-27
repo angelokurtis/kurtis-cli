@@ -5,10 +5,13 @@ Aigle.mixin(require('lodash'));
 const inquirer = require('inquirer');
 
 async function selectCluster() {
-    const clusters = await require('./list-kubernetes-cluster')();
+    const clusters = await require('./list-all-kubernetes-cluster')();
     const length = clusters.length;
     if (length > 1) {
-        const choices = await Aigle.resolve(clusters).map(cluster => ({name: cluster.name, value: cluster}));
+        const choices = await Aigle.resolve(clusters).map(cluster => ({
+            name: `${cluster.project.name}/${cluster.name}`,
+            value: cluster
+        }));
         const questions = [{
             type: 'list',
             name: 'clusters',

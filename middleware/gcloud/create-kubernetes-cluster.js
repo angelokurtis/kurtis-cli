@@ -34,7 +34,7 @@ async function createKubernetesCluster(projectId, computeZone) {
         if (!e.includes || !e.includes('Created')) throw e;
     }
     try {
-        await bash(`gcloud container clusters get-credentials ${clusterName}`, true);
+        await bash(`gcloud container clusters get-credentials ${clusterName}`);
     } catch (e) {
         if (!e.includes || !e.includes('kubeconfig entry generated')) throw e;
     }

@@ -50,8 +50,6 @@ async function list(args, {resources, labels, namespace}) {
         const table = new Table({
             head: [
                 'NAMESPACE',
-                'VERSION',
-                'KIND',
                 'NAME',
                 'SINCE',
             ],
@@ -77,11 +75,10 @@ async function list(args, {resources, labels, namespace}) {
             if (result.length <= i) break;
             const {apiVersion, kind, metadata, time} = result[i];
             const {namespace, name} = metadata;
+            const api = `${kind}.${apiVersion.split('/')[0]}/${name}`;
             table.push([
                 namespace || '',
-                apiVersion || '',
-                kind || '',
-                name || '',
+                api || '',
                 time.fromNow() || ''
             ]);
         }
